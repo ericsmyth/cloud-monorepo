@@ -1,34 +1,34 @@
 resource "aws_s3_bucket" "site" {
-    bucket = local.site_bucket_name
+  bucket = local.site_bucket_name
 
-    tags = local.common_tags
+  tags = local.common_tags
 }
 
 resource "aws_s3_bucket_versioning" "site" {
-    bucket = aws_s3_bucket.site.id
+  bucket = aws_s3_bucket.site.id
 
-    versioning_configuration {
-      status = "Enabled"
-    }
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "site" {
-    bucket = aws_s3_bucket.site.id
+  bucket = aws_s3_bucket.site.id
 
-    rule {
-        apply_server_side_encryption_by_default {
-          sse_algorithm = "AES256"
-        }
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "site" {
-    bucket = aws_s3_bucket.site.id
+  bucket = aws_s3_bucket.site.id
 
-    block_public_acls = true
-    block_public_policy = true
-    ignore_public_acls = true
-    restrict_public_buckets = true
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_cloudfront_origin_access_control" "site" {
@@ -45,21 +45,21 @@ resource "aws_cloudfront_distribution" "site" {
   comment             = "${var.project_name} ${var.environment} static site"
   default_root_object = var.default_root_object
   price_class         = var.price_class
-  aliases = [var.domain_name]
+  aliases             = [var.domain_name]
 
   origin {
     domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
     origin_id                = "s3-${aws_s3_bucket.site.id}"
     origin_access_control_id = aws_cloudfront_origin_access_control.site.id
   }
-  
+
   default_cache_behavior {
     target_origin_id       = "s3-${aws_s3_bucket.site.id}"
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
-    allowed_methods = ["GET", "HEAD", "OPTIONS"]
-    cached_methods  = ["GET", "HEAD", "OPTIONS"]
-    cache_policy_id = data.aws_cloudfront_cache_policy.caching_optimized.id
+    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
+    cached_methods         = ["GET", "HEAD", "OPTIONS"]
+    cache_policy_id        = data.aws_cloudfront_cache_policy.caching_optimized.id
   }
 
   restrictions {
