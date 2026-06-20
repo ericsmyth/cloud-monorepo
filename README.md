@@ -103,10 +103,3 @@ Recommended additions over time:
 - deployment workflow
 - technical decisions and trade-offs
 
-## Goals
-
-This repository is intended to stay:
-
-- readable for other developers
-- reusable for future cloud projects
-- structured well enough for portfolio and contract work
