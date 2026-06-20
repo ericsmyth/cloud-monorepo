@@ -1,0 +1,14 @@
+module "llc_site" {
+  source = "../../modules/static-site"
+
+  project_name        = var.project_name
+  environment         = var.environment
+  domain_name         = var.domain_name
+  hosted_zone_id      = var.hosted_zone_id
+  acm_certificate_arn = var.acm_certificate_arn
+
+  default_root_object = "index.html"
+  price_class         = "PriceClass_100"
+
+  tags = var.tags
+}
