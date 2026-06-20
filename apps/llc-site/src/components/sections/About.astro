@@ -1,0 +1,52 @@
+---
+import Container from '../ui/Container.astro';
+---
+
+<section class="section section--surface">
+  <Container>
+    <div class="grid">
+      <div class="card">
+        <p class="eyebrow">About</p>
+        <h2>Built around practical cloud delivery.</h2>
+        <p id="about-description">
+          Example LLC helps organizations build reliable, maintainable cloud infrastructure with a strong focus on simplicity and documentation.
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="eyebrow">Services</p>
+        <h2>What <span id="about-company-name">Example LLC</span> offers</h2>
+        <ul id="services-list" class="service-list">
+          <li>Cloud architecture</li>
+          <li>Terraform infrastructure</li>
+          <li>Technical documentation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card contact-card">
+      <p class="eyebrow">Contact</p>
+      <h2>Get in touch</h2>
+      <ul class="contact-list">
+        <li>
+          <strong>Email:</strong>
+          <a id="contact-email-link" href="mailto:hello@example.com">
+            <span id="contact-email-text">hello@example.com</span>
+          </a>
+        </li>
+        <li>
+          <strong>Phone:</strong>
+          <span id="contact-phone-text">555-555-5555</span>
+        </li>
+        <li>
+          <strong>Location:</strong>
+          <span id="contact-location-text">Texas, USA</span>
+        </li>
+        <li class="contact-links">
+          <a id="linkedin-link" href="https://www.linkedin.com/in/example">LinkedIn</a>
+          <a id="github-link" href="https://github.com/example">GitHub</a>
+        </li>
+      </ul>
+    </div>
+  </Container>
+</section>

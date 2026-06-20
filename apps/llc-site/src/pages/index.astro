@@ -1,0 +1,28 @@
+---
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="LLC Site"
+  description="Static business website built with Astro and hosted on AWS."
+>
+  <Hero />
+  <About />
+</BaseLayout>
+
+<script>
+  import { applySiteConfig, loadSiteConfig } from '../lib/config';
+
+  async function bootstrapSite() {
+    try {
+      const config = await loadSiteConfig();
+      applySiteConfig(config);
+    } catch (error) {
+      console.error('Unable to load site configuration.', error);
+    }
+  }
+
+  bootstrapSite();
+</script>

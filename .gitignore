@@ -8,4 +8,6 @@
 # Ignore OS specific files
 .DS_Store
 Thumbs.db
-EOF
+
+# Ignore real app config values
+config/llc-site/prod/config.json

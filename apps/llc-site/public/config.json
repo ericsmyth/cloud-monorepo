@@ -1,0 +1,17 @@
+{
+  "companyName": "Example LLC",
+  "tagline": "Cloud architecture and delivery for small teams.",
+  "description": "Example LLC helps organizations build reliable, maintainable cloud infrastructure with a strong focus on simplicity and documentation.",
+  "email": "hello@example.com",
+  "phone": "555-555-5555",
+  "location": "Texas, USA",
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/example",
+    "github": "https://github.com/example"
+  },
+  "services": [
+    "Cloud architecture",
+    "Terraform infrastructure",
+    "Technical documentation"
+  ]
+}
