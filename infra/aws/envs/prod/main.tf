@@ -2,6 +2,7 @@ module "llc_site" {
   source = "../../modules/static-site"
 
   project_name        = var.project_name
+  site_bucket_name    = var.site_bucket_name
   environment         = var.environment
   domain_name         = var.domain_name
   hosted_zone_id      = var.hosted_zone_id

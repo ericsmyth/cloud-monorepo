@@ -8,6 +8,11 @@ variable "project_name" {
   type        = string
 }
 
+variable "site_bucket_name" {
+  description = "Explicit S3 bucket name for static site assets."
+  type        = string
+}
+
 variable "environment" {
   description = "Deployment environment."
   type        = string

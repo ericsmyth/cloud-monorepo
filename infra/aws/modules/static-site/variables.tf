@@ -20,6 +20,13 @@ variable "hosted_zone_id" {
 
 variable "acm_certificate_arn" {
   description = "ARN of ACM cert in us-east-1 for CloudFront."
+  type        = string
+}
+
+variable "site_bucket_name" {
+  description = "Optional explicit S3 bucket name for static site assets."
+  type        = string
+  default     = null
 }
 
 variable "default_root_object" {

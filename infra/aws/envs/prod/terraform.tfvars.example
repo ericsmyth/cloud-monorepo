@@ -1,5 +1,6 @@
-aws_region          = "us-west-2"
+aws_region          = "us-west-1"
 project_name        = "llc-site"
+site_bucket_name    = "your-bucket-name"
 environment         = "prod"
 domain_name         = "example.com"
 hosted_zone_id      = "Z1234567890ABCDE"
