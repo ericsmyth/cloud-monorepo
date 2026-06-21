@@ -17,6 +17,7 @@ permissions:
 
 jobs:
   deploy:
+    environment: prod
     runs-on: ubuntu-latest
     env:
       AWS_REGION: ${{ vars.AWS_REGION }}
