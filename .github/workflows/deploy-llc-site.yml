@@ -1,0 +1,63 @@
+name: Deploy LLC Site
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-llc-site.yml"
+      - "apps/llc-site/**"
+      - "config/llc-site/config.example.json"
+      - "scripts/copy-llc-site-config.sh"
+      - "scripts/reset-llc-site-config.sh"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      S3_BUCKET_NAME: ${{ vars.LLC_SITE_S3_BUCKET_NAME }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.LLC_SITE_CLOUDFRONT_DISTRIBUTION_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/llc-site/package-lock.json
+
+      - name: Install app dependencies
+        run: npm --prefix "./apps/llc-site" ci
+
+      - name: Write production site config
+        shell: bash
+        run: |
+          mkdir -p "./config/llc-site/prod"
+          printf '%s' '${{ secrets.LLC_SITE_CONFIG_JSON }}' > "./config/llc-site/prod/config.json"
+
+      - name: Sync production config into Astro app
+        run: npm --prefix "./apps/llc-site" run sync-config
+
+      - name: Build Astro site
+        run: npm --prefix "./apps/llc-site" run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync build output to S3
+        run: aws s3 sync "./apps/llc-site/dist/" "s3://${S3_BUCKET_NAME}" --delete
+
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" --paths "/*"

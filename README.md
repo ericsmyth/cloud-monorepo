@@ -89,6 +89,26 @@ The initial AWS design uses:
 - Route53 for DNS
 - ACM for the CloudFront certificate
 
+## GitHub Actions Deploy
+
+The LLC site can be deployed from GitHub Actions using:
+
+```text
+.github/workflows/deploy-llc-site.yml
+```
+
+The workflow expects these repository secrets:
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `LLC_SITE_CONFIG_JSON`
+
+The workflow expects these repository variables:
+
+- `AWS_REGION`
+- `LLC_SITE_S3_BUCKET_NAME`
+- `LLC_SITE_CLOUDFRONT_DISTRIBUTION_ID`
+
 ## Documentation
 
 Project notes and architecture documents live in:
