@@ -6,8 +6,8 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "sync-config": "sh ../../scripts/copy-llc-site-config.sh",
-    "reset-config": "sh ../../scripts/reset-llc-site-config.sh",
+    "sync-config": "bash ../../scripts/copy-llc-site-config.sh",
+    "reset-config": "bash ../../scripts/reset-llc-site-config.sh",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
