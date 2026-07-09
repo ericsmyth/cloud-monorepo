@@ -17,3 +17,8 @@ output "site_url" {
   description = "Primary site URL."
   value       = module.llc_site.site_url
 }
+
+output "mail_mx_record_fqdn" {
+  description = "FQDN for the mail MX record."
+  value       = module.mail_dns.mx_record_fqdn
+}

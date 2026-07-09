@@ -13,3 +13,12 @@ module "llc_site" {
 
   tags = var.tags
 }
+
+module "mail_dns" {
+  source         = "../../modules/mail-dns"
+  hosted_zone_id = var.hosted_zone_id
+  domain_name    = var.domain_name
+  record_name    = var.mail_record_name
+  ttl            = var.mail_ttl
+  mx_records     = var.mail_mx_records
+}

@@ -34,6 +34,27 @@ variable "acm_certificate_arn" {
   type        = string
 }
 
+variable "mail_record_name" {
+  description = "Subdomain label for mail DNS. Use an empty string for the root domain."
+  type        = string
+  default     = ""
+}
+
+variable "mail_ttl" {
+  description = "TTL for the mail MX record."
+  type        = number
+  default     = 300
+}
+
+variable "mail_mx_records" {
+  description = "MX records for the domain mail provider."
+  type = list(object({
+    priority = number
+    value    = string
+  }))
+  default = []
+}
+
 variable "tags" {
   description = "Additional tags applied to resources."
   type        = map(string)

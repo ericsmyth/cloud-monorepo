@@ -11,3 +11,6 @@ Thumbs.db
 
 # Ignore real app config values
 config/llc-site/prod/config.json
+
+# Ignore IDE settings
+.vscode
